@@ -1,0 +1,54 @@
+MERN Stack Application - "Karm"
+
+Frontend (React)                              Backend (Node.js + Express)
+----------------------------------            --------------------------------
+| Assets                [Assets]             | Controllers                    |
+| - images              [Images]             | - applicationController.js     |
+| - icons               [Icons]              | - companyController.js         |
+|                                          | - jobController.js             |
+| Components            [Components]         | - userController.js            |
+| - Admin                [Admin]             | Middleware                      |
+|   - AdminJobs          [AdminJobs]         | - errorMiddleware.js           |
+|   - AdminJobsTable     [AdminJobsTable]    | - isAuthenticated.js           |
+| - Applicants           [Applicants]        | - multerMiddleware.js          |
+|   - ApplicantsTable    [ApplicantsTable]   | Models                          |
+| - Companies            [Companies]         | - applicationModel.js          |
+|   - CompaniesTable     [CompaniesTable]    | - auditModel.js                |
+|   - CompaniesCreate    [CompaniesCreate]   | - chatModel.js                 |
+| - Jobs                 [Jobs]              | - companyModel.js              |
+|   - PostJob            [PostJob]           | - feedbackModel.js             |
+| - Protected Route      [ProtectedRoute]    | - fileStorageModel.js          |
+| Shared                 [Shared]            | - jobModel.js                  |
+| - Footer               [Footer]            | - notificationModel.js         |
+| - Navbar               [Navbar]            | - paymentModel.js              |
+| UI Components          [UI Components]     | - skillModel.js                |
+| - AppliedJobTable      [AppliedJobTable]   | - subscriptionModel.js         |
+| - Browse               [Browse]            | - userModel.js                 |
+| - Category             [Category]          | Routes                         |
+| - FilterCard           [FilterCard]        | - applicationRoutes.js         |
+| - HeroSection          [HeroSection]       | - companyRoutes.js             |
+| - Home                 [Home]              | - jobRoutes.js                 |
+| - Job                  [Job]               | - userRoutes.js                |
+| - JobDescription       [JobDescription]    | Utils                          |
+| - Jobs                 [Jobs]              | - cloudinary.js                |
+| - Profile              [Profile]           | - dataUri.js                   |
+| - UpdateProfile        [UpdateProfile]     | - db.js                        |
+| Hooks                  [Hooks]             | Environment Config             |
+| - useGetAllAdmins      [useGetAllAdmins]   | - .env                         |
+| - useGetAllCompanies   [useGetAllCompanies]| Main Server File               |
+| - useGetAllJobs        [useGetAllJobs]     | - index.js                     |
+| - useGetCompanyById    [useGetCompanyById] |                                 |
+| Lib                    [Lib]               |                                 |
+| - utils.js             [utils.js]          |                                 |
+| Redux                  [Redux]             |                                 |
+| - applicationSlice.js  [applicationSlice]  |                                 |
+| - authSlice.js         [authSlice]         |                                 |
+| - companySlice.js      [companySlice]      |                                 |
+| - jobSlice.js          [jobSlice]          |                                 |
+| - store.js             [store]             |                                 |
+| Utils                  [Utils]             |                                 |
+| - constant.js          [constant]          |                                 |
+| Main App File          [App.jsx]           |                                 |
+| Styles                 [index.css]         |                                 |
+| Project Setup          [vite-project]      |                                 |
+----------------------------------            --------------------------------

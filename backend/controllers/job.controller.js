@@ -1,14 +1,14 @@
 import { Job } from "../models/job.model.js";
 
-// admin post krega job
-export const postJob = async (req, res) => {
+
+export const postJob = async (req, res) => { //job will b psosted by admin
     try {
-        const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
+        const { title, description, requirements, salary, location, jobType, experience, position, companyId, } = req.body;
         const userId = req.id;
 
         if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
             return res.status(400).json({
-                message: "Somethin is missing.",
+                message: "Something is missing.",
                 success: false
             })
         };
@@ -26,26 +26,26 @@ export const postJob = async (req, res) => {
         });
         return res.status(201).json({
             message: "New job created successfully.",
-            job,
+            job,//for frontend returning only job
             success: true
         });
     } catch (error) {
         console.log(error);
     }
 }
-// student k liye
+//For students only
 export const getAllJobs = async (req, res) => {
     try {
-        const keyword = req.query.keyword || "";
-        const query = {
-            $or: [
+        const keyword = req.query.keyword || "";//retrives the keyword from query parameters if not found return empty string
+        const query = { //create momgodb query obj
+            $or: [//or operator isused to found document where title or description match with the keyword using case insensitive regex($regex and $options:"i")
                 { title: { $regex: keyword, $options: "i" } },
                 { description: { $regex: keyword, $options: "i" } },
             ]
         };
-        const jobs = await Job.find(query).populate({
+        const jobs = await Job.find(query).populate({ //find all the jobs that match with the query and populate the company field
             path: "company"
-        }).sort({ createdAt: -1 });
+        }).sort({ createdAt: -1 }); //sort the data in descending order by createdAt field
         if (!jobs) {
             return res.status(404).json({
                 message: "Jobs not found.",

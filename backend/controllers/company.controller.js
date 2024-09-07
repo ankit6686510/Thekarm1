@@ -34,7 +34,7 @@ export const registerCompany = async (req, res) => {
 }
 export const getCompany = async (req, res) => {
     try {
-        const userId = req.id; // logged in user id
+        const userId = req.id; // the current logged in user
         const companies = await Company.find({ userId });
         if (!companies) {
             return res.status(404).json({
@@ -53,7 +53,7 @@ export const getCompany = async (req, res) => {
 // get company by id
 export const getCompanyById = async (req, res) => {
     try {
-        const companyId = req.params.id;
+        const companyId = req.params.id; // we used params because it is dynamic
         const company = await Company.findById(companyId);
         if (!company) {
             return res.status(404).json({
@@ -74,9 +74,11 @@ export const updateCompany = async (req, res) => {
         const { name, description, website, location } = req.body;
  
         const file = req.file;
-        // idhar cloudinary ayega
+        
         const fileUri = getDataUri(file);
+
         const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        
         const logo = cloudResponse.secure_url;
     
         const updateData = { name, description, website, location, logo };
