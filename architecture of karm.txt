@@ -5,7 +5,7 @@ Frontend (React)                              Backend (Node.js + Express)
 | Assets                [Assets]             | Controllers                    |
 | - images              [Images]             | - applicationController.js     |
 | - icons               [Icons]              | - companyController.js         |
-|                                          | - jobController.js             |
+|                                            |- jobController.js              |
 | Components            [Components]         | - userController.js            |
 | - Admin                [Admin]             | Middleware                      |
 |   - AdminJobs          [AdminJobs]         | - errorMiddleware.js           |
