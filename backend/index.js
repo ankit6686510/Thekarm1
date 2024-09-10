@@ -20,17 +20,17 @@ const _dirname = path.resolve();
 
 // Middleware
 // Security Headers with Helmet
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "https: data:", "https://res.cloudinary.com"],
-      // Other directives...
-    },
-  })
-); // Configure CSP before other middlewares
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       imgSrc: ["'self'", "https: data:", "https://res.cloudinary.com"],
+//       // Other directives...
+//     },
+//   })
+// ); // Configure CSP before other middlewares
 
-app.use(helmet()); // Adds other security-related HTTP headers
+// app.use(helmet()); // Adds other security-related HTTP headers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
