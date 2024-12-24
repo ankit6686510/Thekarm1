@@ -36,7 +36,7 @@ const AdminJobsTable = () => {
   return (
     <div>
       <Table>
-        <TableCaption>A list of your recent posted jobs</TableCaption>
+        <TableCaption>list of your recent posted jobs</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Company Name</TableHead>

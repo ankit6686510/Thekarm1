@@ -1,4 +1,3 @@
-//code fot freelancer
 import React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
@@ -15,6 +14,12 @@ const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Handler for clicking "Kar" and "m"
+  const handleBrandClick = () => {
+    // Redirect to the homepage or any other action you want to perform
+    navigate("/"); // Example action: redirect to homepage
+  };
 
   const logoutHandler = async () => {
     try {
@@ -35,9 +40,9 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-8">
-        <div className="text-4xl font-bold">
-          <span className="text-[#9A6735]">Free</span>
-          <span className="text-[#55883B]">Lancer.</span>
+        <div className="text-5xl font-bold cursor-pointer" onClick={handleBrandClick}>
+          <span className="text-[#9A6735]">Skill</span>
+          <span className="text-[#55883B]">Path.</span>
         </div>
         <ul className="flex items-center gap-6 font-medium">
           {user && user.role === "recruiter" ? (
@@ -51,6 +56,7 @@ const Navbar = () => {
               <li><Link className="nav-link" to="/jobs">Jobs</Link></li>
               <li><Link className="nav-link" to="/browse">Browse</Link></li>
               <li><Link className="nav-link" to="/services">Services</Link></li>
+              <li><Link className="nav-link" to="/services">Carrier</Link></li>
             </>
           )}
         </ul>
@@ -111,6 +117,129 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+// //code fot freelancer
+// import React from "react";
+// import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+// import { Button } from "../ui/button";
+// import { Avatar, AvatarImage } from "../ui/avatar";
+// import { LogOut, User2 } from "lucide-react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import axios from "axios";
+// import { USER_API_END_POINT } from "@/utils/constant";
+// import { setUser } from "@/redux/authSlice";
+// import { toast } from "sonner";
+
+// const Navbar = () => {
+//   const { user } = useSelector((store) => store.auth);
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const logoutHandler = async () => {
+//     try {
+//       const res = await axios.get(`${USER_API_END_POINT}/logout`, {
+//         withCredentials: true,
+//       });
+//       if (res.data.success) {
+//         dispatch(setUser(null));
+//         navigate("/"); // redirect to home page
+//         toast.success(res.data.message);
+//       }
+//     } catch (error) {
+//       console.error(error); // log the error
+//       toast.error(error.response?.data?.message || 'An error occurred');
+//     }
+//   };
+
+//   return (
+//     <nav className="bg-white shadow-md">
+//       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-8">
+//         <div className="text-5xl font-bold">
+//           <span className="text-[#9A6735]" >Kar</span>
+//           <span className="text-[#55883B]">m.</span>
+//         </div>
+//         <ul className="flex items-center gap-6 font-medium">
+//           {user && user.role === "recruiter" ? (
+//             <>
+//               <li><Link className="nav-link" to="/admin/companies">Companies</Link></li>
+//               <li><Link className="nav-link" to="/admin/jobs">Jobs</Link></li>
+//             </>
+//           ) : (
+//             <>
+//               <li><Link className="nav-link" to="/">Home</Link></li>
+//               <li><Link className="nav-link" to="/jobs">Jobs</Link></li>
+//               <li><Link className="nav-link" to="/browse">Browse</Link></li>
+//               <li><Link className="nav-link" to="/services">Services</Link></li>
+//             </>
+//           )}
+//         </ul>
+//         <div className="flex items-center gap-4">
+//           {!user ? (
+//             <>
+//               <Link to="/login">
+//                 <Button variant="outline">Login</Button>
+//               </Link>
+//               <Link to="/signup">
+//                 <Button className="bg-[#55883B] hover:bg-[#38225d]">
+//                   Signup
+//                 </Button>
+//               </Link>
+//             </>
+//           ) : (
+//             <Popover>
+//               <PopoverTrigger asChild>
+//                 <Avatar className="cursor-pointer">
+//                   <AvatarImage
+//                     src={user?.profile?.profilePhoto}
+//                     alt="User profile"
+//                   />
+//                 </Avatar>
+//               </PopoverTrigger>
+//               <PopoverContent className="w-64 md:w-80">
+//                 <div className="flex items-center gap-3 p-4">
+//                   <Avatar className="cursor-pointer">
+//                     <AvatarImage
+//                       src={user?.profile?.profilePhoto}
+//                       alt="User profile"
+//                     />
+//                   </Avatar>
+//                   <div>
+//                     <h4 className="font-medium">{user?.fullname}</h4>
+//                     <p className="text-sm text-gray-600">{user?.profile?.bio}</p>
+//                   </div>
+//                 </div>
+//                 <div className="flex flex-col p-4 text-gray-600 space-y-2">
+//                   {user && user.role === "student" && (
+//                     <Link to="/profile" className="flex items-center gap-2">
+//                       <User2 />
+//                       <Button variant="link">View Profile</Button>
+//                     </Link>
+//                   )}
+//                   <button onClick={logoutHandler} className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+//                     <LogOut />
+//                     <span>Logout</span>
+//                   </button>
+//                 </div>
+//               </PopoverContent>
+//             </Popover>
+//           )}
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
 
 
 

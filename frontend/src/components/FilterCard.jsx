@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "@/redux/jobSlice";
 
@@ -24,6 +25,7 @@ const FilterCard = () => {
     Industry: [],
     Salary: []
   });
+  const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
 
   const changeHandler = (filterType, value) => {
@@ -36,6 +38,15 @@ const FilterCard = () => {
     });
   };
 
+  const filteredOptions = useMemo(() => {
+    return filterData.map(category => ({
+      ...category,
+      array: category.array.filter(item =>
+        item.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    }));
+  }, [searchTerm]);
+
   useEffect(() => {
     dispatch(setSearchedQuery(filters));
   }, [filters, dispatch]);
@@ -43,8 +54,15 @@ const FilterCard = () => {
   return (
     <div className="w-full bg-white p-3 rounded-md">
       <h1 className="font-bold text-lg">Filter Jobs</h1>
+      <Input
+        type="text"
+        placeholder="Search filters..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="my-3"
+      />
       <hr className="mt-3" />
-      {filterData.map((data, index) => (
+      {filteredOptions.map((data, index) => (
         <div key={index} className="mb-4">
           <h2 className="font-bold text-lg">{data.filterType}</h2>
           {data.array.map((item, idx) => (
@@ -65,6 +83,82 @@ const FilterCard = () => {
 };
 
 export default FilterCard;
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import { Label } from "./ui/label";
+// import { useDispatch } from "react-redux";
+// import { setSearchedQuery } from "@/redux/jobSlice";
+
+// const filterData = [
+//   {
+//     filterType: "Location",
+//     array: ["Bihar", "Uttar Pradesh", "Delhi NCR", "Bangalore", "Hyderabad", "Pune", "Mumbai", "Noida", "Gurugram"],
+//   },
+//   {
+//     filterType: "Industry",
+//     array: ["Frontend Developer", "Backend Developer", "FullStack Developer", "Data Scientist", "Data Analyst", "DevOps Engineer", "Product Manager", "UI Designer", "Data Engineer", "Cloud Architect"],
+//   },
+//   {
+//     filterType: "Salary",
+//     array: ["0-20k", "20-40k", "42k-1lakh", "1lakh to 5lakh", "5lakh+"],
+//   },
+// ];
+
+// const FilterCard = () => {
+//   const [filters, setFilters] = useState({
+//     Location: [],
+//     Industry: [],
+//     Salary: []
+//   });
+//   const dispatch = useDispatch();
+
+//   const changeHandler = (filterType, value) => {
+//     setFilters(prevFilters => {
+//       const updatedFilter = prevFilters[filterType].includes(value)
+//         ? prevFilters[filterType].filter(item => item !== value)
+//         : [...prevFilters[filterType], value];
+
+//       return { ...prevFilters, [filterType]: updatedFilter };
+//     });
+//   };
+
+//   useEffect(() => {
+//     dispatch(setSearchedQuery(filters));
+//   }, [filters, dispatch]);
+
+//   return (
+//     <div className="w-full bg-white p-3 rounded-md">
+//       <h1 className="font-bold text-lg">Filter Jobs</h1>
+//       <hr className="mt-3" />
+//       {filterData.map((data, index) => (
+//         <div key={index} className="mb-4">
+//           <h2 className="font-bold text-lg">{data.filterType}</h2>
+//           {data.array.map((item, idx) => (
+//             <div key={idx} className="flex items-center space-x-2 my-2">
+//               <input
+//                 type="checkbox"
+//                 checked={filters[data.filterType].includes(item)}
+//                 onChange={() => changeHandler(data.filterType, item)}
+//                 id={`checkbox-${index}-${idx}`}
+//               />
+//               <Label htmlFor={`checkbox-${index}-${idx}`}>{item}</Label>
+//             </div>
+//           ))}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default FilterCard;
 
 
 
