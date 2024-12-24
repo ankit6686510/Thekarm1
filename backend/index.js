@@ -52,6 +52,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+
 // const chatRoutes = require('./chatRoutes');
 
 // Routes
